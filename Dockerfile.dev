@@ -1,0 +1,16 @@
+FROM python:3.9.2
+
+WORKDIR /app
+
+COPY ./requirements.txt ./requirements.txt
+
+ENV FLASK_ENV="docker"
+
+ENV PORT=5005
+
+RUN pip3 install -r requirements.txt
+
+EXPOSE 5005
+
+ENTRYPOINT [ "python" ]
+CMD [ "app.py" ]
