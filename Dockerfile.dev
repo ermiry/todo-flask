@@ -6,11 +6,10 @@ COPY ./requirements.txt ./requirements.txt
 
 ENV FLASK_ENV="docker"
 
-ENV PORT=5005
+ENV PORT=5000
 
 RUN pip3 install -r requirements.txt
 
-EXPOSE 5005
+EXPOSE 5000
 
-ENTRYPOINT [ "python" ]
-CMD [ "app.py" ]
+CMD ["python3 app.py"]
