@@ -6,7 +6,7 @@ sudo docker run \
   -it \
   --name todo --rm \
   -p 5000:5000 \
-  -v /home/ermiry/Documents/ermiry/Projects/todo-cerver:/home/todo \
+  -v /home/ermiry/Documents/ermiry/Projects/todo-flask:/home/todo \
   -e RUNTIME=development \
   -e PORT=5000 \
   -e CERVER_RECEIVE_BUFFER_SIZE=4096 -e CERVER_TH_THREADS=4 \
@@ -15,7 +15,7 @@ sudo docker run \
   -e MONGO_URI=mongodb://api:password@192.168.100.39:27017/todo \
   -e PRIV_KEY=/home/todo/keys/key.key -e PUB_KEY=/home/todo/keys/key.pub \
   -e ENABLE_USERS_ROUTES=TRUE \
-  ermiry/todo-cerver-api:development /bin/bash
+  ermiry/todo-flask-api:development /bin/bash
 ```
 
 ## Routes
