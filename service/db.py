@@ -1,12 +1,14 @@
 import os
 from pymongo import MongoClient
 
+import todo
+
 db = None
 
-def mongo ():
+def todo_mongo_init ():
 	global db
 
-	client = MongoClient (os.environ.get ("MONGO_URI"))
+	client = MongoClient (todo.MONGO_URI)
 	try:
 		db = client.todo
 		print ("Mongodb connected!")
