@@ -1,7 +1,7 @@
 TODO_VERSION 			= "0.1"
 TODO_VERSION_NAME 		= "Version 0.1"
-TODO_VERSION_DATE 		= "05/04/2021"
-TODO_VERSION_TIME 		= "08:55 CST"
+TODO_VERSION_DATE 		= "25/04/2021"
+TODO_VERSION_TIME 		= "15:11 CST"
 TODO_VERSION_AUTHOR 	= "Erick Salas"
 
 def todo_version_print_full ():
