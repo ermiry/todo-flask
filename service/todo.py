@@ -2,36 +2,33 @@ import os
 
 from runtime import *
 
-RUNTIME = RUNTIME_TYPE_NONE
+RUNTIME = runtime_from_string (os.environ.get ("RUNTIME"))
 
-PORT = 5000
+PORT = int (os.environ.get ("PORT"))
 
-MONGO_APP_NAME = None
-MONGO_DB = None
-MONGO_URI = None
+MONGO_APP_NAME = os.environ.get ("MONGO_APP_NAME")
+MONGO_DB = os.environ.get ("MONGO_DB")
+MONGO_URI = os.environ.get ("MONGO_URI")
 
-PRIV_KEY = None
-PUB_KEY = None
+PRIV_KEY = os.environ.get ("PRIV_KEY")
+PUB_KEY = os.environ.get ("PUB_KEY")
 
-def todo_init ():
-	global RUNTIME
+ENABLE_USERS_ROUTES = os.environ.get ("ENABLE_USERS_ROUTES")
+if (ENABLE_USERS_ROUTES == "TRUE"):
+	ENABLE_USERS_ROUTES = True
+else:
+	ENABLE_USERS_ROUTES = False
 
-	global PORT
+def todo_config ():
+	print ("RUNTIME: ", runtime_to_string (RUNTIME))
 
-	global MONGO_APP_NAME
-	global MONGO_DB
-	global MONGO_URI
+	print ("PORT: ", PORT)
 
-	global PRIV_KEY
-	global PUB_KEY
+	print ("MONGO_APP_NAME: ", MONGO_APP_NAME)
+	print ("MONGO_DB: ", MONGO_DB)
+	print ("MONGO_URI: ", MONGO_URI)
 
-	RUNTIME = runtime_from_string (os.environ.get ("RUNTIME"))
+	print ("PRIV_KEY: ", PRIV_KEY)
+	print ("PUB_KEY: ", PUB_KEY)
 
-	PORT = int (os.environ.get ("PORT"))
-
-	MONGO_APP_NAME = os.environ.get ("MONGO_APP_NAME")
-	MONGO_DB = os.environ.get ("MONGO_DB")
-	MONGO_URI = os.environ.get ("MONGO_URI")
-
-	PRIV_KEY = os.environ.get ("PRIV_KEY")
-	PUB_KEY = os.environ.get ("PUB_KEY")
+	print ("ENABLE_USERS_ROUTES: ", ENABLE_USERS_ROUTES)
