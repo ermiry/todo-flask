@@ -3,15 +3,21 @@ from pymongo import MongoClient
 
 import todo
 
-db = None
+from models.user import user_model_init
+from models.item import item_model_init
+
+todo_db = None
 
 def todo_mongo_init ():
-	global db
+	global todo_db
 
 	client = MongoClient (todo.MONGO_URI)
 	try:
-		db = client.todo
-		print ("Mongodb connected!")
+		todo_db = client.todo
+		print ("Mongo DB connected!")
+
+		user_model_init (todo_db)
+		item_model_init (todo_db)
 
 	except:
-		print ("Error connecting to Mongodb (Authentication Failed)")
+		print ("Error connecting to Mongo DB")
