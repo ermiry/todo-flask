@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, make_response
 
 from errors import *
 import runtime
@@ -17,7 +17,7 @@ items = Blueprint ('items', __name__)
 def todo_items_handler (decoded_user):
 	result = controllers.items.todo_items_get_all_by_user (decoded_user)
 	if (result is not None):
-		return result, 200
+		return make_response (result, 200, {"Content-Type": "application/json"})
 
 	else:
 		return jsonify ({
@@ -39,9 +39,18 @@ def todo_item_create_handler (decoded_user):
 
 # GET /api/todo/items/:id/info
 # returns information about an existing item that belongs to a user
-@items.route ('/api/todo/items/:id/info', methods=['GET'])
-def items_login_handler ():
-	pass
+@items.route ('/api/todo/items/<item_id>/info', methods=['GET'])
+@controllers.service.token_required
+def items_login_handler (decoded_user, item_id):
+	result = controllers.items.todo_item_get_by_id_and_user_to_json (
+		decoded_user, item_id
+	)
+
+	if (result is not None):
+		return make_response (result, 200, {"Content-Type": "application/json"})
+
+	else:
+		return jsonify ({"error": "Item not found"}), 404
 
 # PUT /api/todo/items/:id/update
 # a user wants to update an existing item
