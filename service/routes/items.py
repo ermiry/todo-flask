@@ -54,12 +54,30 @@ def items_login_handler (decoded_user, item_id):
 
 # PUT /api/todo/items/:id/update
 # a user wants to update an existing item
-@items.route ('/api/todo/items/:id/update', methods=['PUT'])
-def todo_item_update_handler ():
-	pass
+@items.route ('/api/todo/items/<item_id>/update', methods=['PUT'])
+@controllers.service.token_required
+def todo_item_update_handler (decoded_user, item_id):
+	result = controllers.items.todo_item_update (
+		decoded_user, item_id, request
+	)
+
+	if result == TODO_ERROR_NONE:
+		return jsonify ({"msg": "Updated item!"}), 200
+
+	else:
+		return todo_error_send_response (result)
 
 # DELETE /api/todo/items/:id/remove
 # deletes an existing user's item
-@items.route ('/api/todo/items/:id/remove', methods=['DELETE'])
-def todo_item_delete_handler ():
-	pass
+@items.route ('/api/todo/items/<item_id>/remove', methods=['DELETE'])
+@controllers.service.token_required
+def todo_item_delete_handler (decoded_user, item_id):
+	result = controllers.items.todo_item_delete_by_id_and_user (
+		decoded_user, item_id
+	)
+
+	if (result):
+		return jsonify ({"msg": "Deleted item!"}), 200
+
+	else:
+		return jsonify ({"error": "Item not found"}), 404
