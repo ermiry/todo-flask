@@ -20,9 +20,7 @@ def token_required (f):
 		if not token:
 			return jsonify ({"error": "Missing token"}), 401
 		try:
-			print (token)
 			token = token[len ("Bearer "):]
-			print (token)
 			data = jwt.decode (token, app.config.get ("PUB_KEY"), algorithms='RS256')
 			decoded_user = controllers.users.todo_user_load_from_decoded_data (data)
 		except Exception as e:
