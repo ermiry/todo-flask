@@ -27,8 +27,15 @@ def todo_items_handler (decoded_user):
 # POST /api/todo/items/register
 # a user has requested to create a new item
 @items.route ('/api/todo/items', methods=['POST'])
-def todo_item_create_handler ():
-	pass
+@controllers.service.token_required
+def todo_item_create_handler (decoded_user):
+	result = controllers.items.todo_item_create (decoded_user, request)
+
+	if result == TODO_ERROR_NONE:
+		return jsonify ({"msg": "Created a new item!"}), 200
+
+	else:
+		return todo_error_send_response (result)
 
 # GET /api/todo/items/:id/info
 # returns information about an existing item that belongs to a user
