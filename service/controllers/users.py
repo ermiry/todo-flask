@@ -15,6 +15,11 @@ def todo_users_init (flask_app):
 	global app
 	app = flask_app
 
+def todo_user_load_from_decoded_data (decoded_data):
+	user = user_load (**decoded_data)
+
+	return user
+
 def todo_user_get_by_email (email):
 	found = user_get_by_email (email)
 	if (found is not None):
