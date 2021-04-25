@@ -27,4 +27,10 @@ def users_register_handler ():
 # POST /api/users/login
 @users.route ('/api/users/login', methods=['POST'])
 def users_login_handler ():
-	pass
+	error, user = controllers.users.todo_users_login (request)
+
+	if error == TODO_ERROR_NONE:
+		return controllers.users.todo_user_generate_token (user)
+
+	else:
+		return todo_error_send_response (result)
