@@ -9,8 +9,6 @@ sudo docker run \
   -v /home/ermiry/Documents/ermiry/Projects/todo-flask:/home/todo \
   -e RUNTIME=development \
   -e PORT=5000 \
-  -e CERVER_RECEIVE_BUFFER_SIZE=4096 -e CERVER_TH_THREADS=4 \
-  -e CERVER_CONNECTION_QUEUE=4 \
   -e MONGO_APP_NAME=api -e MONGO_DB=todo \
   -e MONGO_URI=mongodb://api:password@192.168.100.39:27017/todo \
   -e PRIV_KEY=/home/todo/keys/key.key -e PUB_KEY=/home/todo/keys/key.pub \
